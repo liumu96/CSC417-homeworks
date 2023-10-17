@@ -67,7 +67,8 @@ endfunction()
 set(LIBIGL_EIGEN_VERSION 3.2.10 CACHE STRING "Default version of Eigen used by libigl.")
 function(igl_download_eigen)
 	igl_download_project(eigen
-		GIT_REPOSITORY https://github.com/eigenteam/eigen-git-mirror.git
+		# GIT_REPOSITORY https://github.com/eigenteam/eigen-git-mirror.git
+		GIT_REPOSITORY git@github.com:eigenteam/eigen-git-mirror.git
 		GIT_TAG        ${LIBIGL_EIGEN_VERSION}
 		${LIBIGL_BRANCH_OPTIONS}
 	)
