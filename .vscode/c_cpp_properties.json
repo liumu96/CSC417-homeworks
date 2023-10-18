@@ -3,7 +3,11 @@
         {
             "name": "Mac",
             "includePath": [
-                "${default}"
+                "${default}",
+                "${workspaceFolder}/a2-mass-spring-3d/include",
+                "${workspaceFolder}/a1-mass-spring-1d/extern/libigl/external/eigen",
+                "${workspaceFolder}/a2-mass-spring-3d/shared/include",
+                "${workspaceFolder}/a1-mass-spring-1d/extern/libigl/include"
             ],
             "defines": [],
             "macFrameworkPath": [
