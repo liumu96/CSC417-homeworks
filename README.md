@@ -10,7 +10,7 @@ cmake ..
 make
 ```
 
-- mass-spring-1D
+- [mass-spring-1D](./a1-mass-spring-1d/README.md)
 
 ```shell
 ./mass-spring-1d
