@@ -518,3 +518,9 @@ M = P * M * P.transpose();
 f = P * f;
 K = P * K * P.transpose();
 ```
+
+## Results
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a2-mass-spring-3d/mass-spring-3d.gif" style="width: 500px">
+</div>
