@@ -3,7 +3,10 @@
 ## Background
 
 Mass Spring System:
-![](../results/a1-mass-spring-1d/mass-spring-1d.png)
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/mass-spring-1d.png" style="width: 200px">
+</div>
 
 $$
 q = x(t) \\
@@ -116,10 +119,16 @@ qdot = qdot + dt * f / mass; // f = -k*q
 ```
 
 **Phase-Space**
-![](../results/a1-mass-spring-1d/forward-euler.png)
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/forward-euler.png" style="width: 200px">
+</div>
 
 **Result**
-![](../results/a1-mass-spring-1d/forward-euler.gif)
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/forward-euler.gif" style="width: 500px">
+</div>
 
 ### Attempt #2: Runge-Kutta Integration
 
@@ -164,11 +173,16 @@ qdot = dt * (f1 + 2 * f2 + 2 * f3 + f4) / 6 / mass + qdot;
 ```
 
 **Phase-Space**
-![](../results/a1-mass-spring-1d/runge-kutta.png)
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/runge-kutta.png" style="width: 200px">
+</div>
 
 **Result**
 
-![](../results/a1-mass-spring-1d/runge-kutta.gif)
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/runge-kutta.gif" style="width: 500px">
+</div>
 
 ### Attempt #3: Backward Integration
 
@@ -200,11 +214,16 @@ q = q + dt * qdot;
 ```
 
 **Phase-Space**
-![](../results/a1-mass-spring-1d/backward-euler.png)
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/backward-euler.png" style="width: 200px">
+</div>
 
 **Result**
 
-![](../results/a1-mass-spring-1d/backward-euler.gif)
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/backward-euler.gif" style="width: 500px">
+</div>
 
 ### Attempt #4: Symplectic Euler Integration
 
@@ -224,11 +243,16 @@ q = q + dt * qdot;
 ```
 
 **Phase-Space**
-![](../results/a1-mass-spring-1d/symplectic-euler.png)
+
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/symplectic-euler.png" style="width: 200px">
+</div>
 
 **Result**
 
-![](../results/a1-mass-spring-1d/symplectic-euler.gif)
+<div style="display: flex; justify-content: center;">
+<img src="../results/a1-mass-spring-1d/symplectic-euler.gif" style="width: 500px">
+</div>
 
 **Derivatives**
 
