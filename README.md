@@ -27,3 +27,14 @@ make
 ```shell
 ./mass-spring-1d 'se'
 ```
+
+- [mass-spring-3d](./a2-mass-spring-3d/README.md)
+
+```shell
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make
+```
+
+```shell
+./mass-spring-3d
+```

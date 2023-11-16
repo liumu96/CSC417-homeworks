@@ -7,7 +7,15 @@
                 "${workspaceFolder}/a2-mass-spring-3d/include",
                 "${workspaceFolder}/a1-mass-spring-1d/extern/libigl/external/eigen",
                 "${workspaceFolder}/a2-mass-spring-3d/shared/include",
-                "${workspaceFolder}/a1-mass-spring-1d/extern/libigl/include"
+                "${workspaceFolder}/a1-mass-spring-1d/extern/libigl/include",
+                "${workspaceFolder}/a1-mass-spring-1d/shared/include",
+                "${workspaceFolder}/a1-mass-spring-1d/include",
+                "${workspaceFolder}/build/_deps/libigl-src/include",
+                "${workspaceFolder}/build/_deps/eigen-src",
+                "${workspaceFolder}/build/_deps/glfw-src/include",
+                "${workspaceFolder}/build/_deps/imgui-src",
+                "${workspaceFolder}/build/_deps/libigl_imgui_fonts-src",
+                "${workspaceFolder}/build/_deps/imgui-src"
             ],
             "defines": [],
             "macFrameworkPath": [

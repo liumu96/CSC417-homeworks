@@ -1,3 +1,5 @@
+.vscode
+
 # Prerequisites
 *.d
 
@@ -34,4 +36,6 @@
 .DS_Store
 build
 
-.vscode
+.vscode/c_cpp_properties.json
+
+build1

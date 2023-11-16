@@ -37,6 +37,6 @@ namespace Visualize
     // animate geometry using physics simulation
     void rigid_transform_1d(unsigned int id, double x);
 
-    void scale_x(unsigned id, double x);
+    void scale_x(unsigned int id, double x);
 
 }

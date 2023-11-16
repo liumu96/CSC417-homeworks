@@ -88,6 +88,10 @@
     "concepts": "cpp",
     "numeric": "cpp",
     "random": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "sparse": "cpp",
+    "condition_variable": "cpp",
+    "future": "cpp",
+    "valarray": "cpp"
   }
 }
