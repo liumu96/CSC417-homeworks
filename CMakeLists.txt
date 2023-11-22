@@ -40,5 +40,7 @@ set(DATA_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/data)
 set(DEST_DATA_FOLDER ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${DATA_FOLDER} DESTINATION ${DEST_DATA_FOLDER})
 
-add_subdirectory(a1-mass-spring-1d)
-add_subdirectory(a2-mass-spring-3d)
+# add_subdirectory(a1-mass-spring-1d)
+# add_subdirectory(a2-mass-spring-3d)
+
+add_subdirectory(a3-finite-elements-3d)
