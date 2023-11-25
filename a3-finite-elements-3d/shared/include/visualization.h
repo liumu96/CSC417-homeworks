@@ -4,7 +4,6 @@
 
 #include <igl/unproject.h>
 #include <pick_nearest_vertices.h>
-#include "EigenTypes.h"
 
 #include <igl/opengl/glfw/Viewer.h>
 #include <igl/opengl/glfw/imgui/ImGuiPlugin.h>
@@ -35,7 +34,7 @@ namespace Visualize
         const char *label,
         unsigned int type,
         ImVec2 T_bounds,
-        ImVec2 E_bounds,
+        ImVec2 V_bounds,
         ImU32 plot_col);
 
     void setup(

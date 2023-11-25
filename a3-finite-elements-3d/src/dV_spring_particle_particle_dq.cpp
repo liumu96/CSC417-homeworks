@@ -23,4 +23,4 @@ void dV_spring_particle_particle_dq(
     // construct the force
     f.head(3) = -force; // 对 q0 的梯度
     f.tail(3) = force;  // 对 q1 的梯度
-};
+}

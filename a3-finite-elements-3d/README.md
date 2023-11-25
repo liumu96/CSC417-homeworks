@@ -313,7 +313,28 @@ V_j = vol_j \cdot \psi(F_j(q_j)) \\
 V = \sum_{j = 0}^{m-1} vol_j \cdot \psi(F_j(E_j q))
 $$
 
+We need to compute $vol_j \cdot \psi(F_j(E_j q))$, the key computing is $\frac{\partial \phi}{\partial X}$ and $\Psi$
+
 ```cpp
+auto neohookean_linear_tet = [&](
+    double &e,
+    Eigen::Ref<const Eigen::VectorXd> q,
+    Eigen::Ref<const Eigen::RowVectorXi> element)
+{
+    Eigen::Vector3d X = V.row(element(0)).transpose();
+
+    Eigen::Matrix34d x;
+    Eigen::Matrix43d dphi;
+
+    x << q.segment<3>(element(0) * 3),
+        q.segment<3>(element(1) * 3),
+        q.segment<3>(element(2) * 3),
+        q.segment<3>(element(3) * 3);
+    dphi_linear_tetrahedron_dX(dphi, V, element, X);
+    psi_neo_hookean(e, x * dphi, C, D);
+};
+
+quadrature_single_point(energy, q, element, volume, neohookean_linear_tet);
 
 ```
 
@@ -553,7 +574,6 @@ for (unsigned int vi = 0; vi < V.rows(); vi++)
     min_vertex = (V(vi, 1) < min_vertex ? V(vi, 1) : min_vertex);
 }
 
-std::cout << min_vertex << std::endl;
 
 for (unsigned int vi = 0; vi < V.rows(); vi++)
 {

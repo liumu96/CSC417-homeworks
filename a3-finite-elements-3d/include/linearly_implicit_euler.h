@@ -30,7 +30,6 @@ inline void linearly_implicit_euler(
     Eigen::VectorXd &tmp_force,
     Eigen::SparseMatrixd &tmp_stiffness)
 {
-    // todo
     Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> solver;
     stiffness(tmp_stiffness, q, qdot);
     force(tmp_force, q, qdot);

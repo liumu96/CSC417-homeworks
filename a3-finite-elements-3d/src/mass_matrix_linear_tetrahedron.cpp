@@ -7,7 +7,10 @@ void mass_matrix_linear_tetrahedron(
     double density,
     double volume)
 {
-
+    //                   [1/10, 1/20, 1/20, 1/20]
+    // M_0 = rho * vol * [1/20, 1/10, 1/20, 1/20]
+    //                   [1/20, 1/20, 1/10, 1/20]
+    //                   [1/20, 1/20, 1/20, 1/10]
     M.setZero();
 
     Eigen::Matrix4d M_0;

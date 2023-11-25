@@ -4,20 +4,20 @@
 #include <EigenTypes.h>
 #include <newtons_method.h>
 
-/**
- * @param q - generalized coordinates for the FEM system
- * @param qdot - generalized velocity for the FEM system
- * @param dt - the time step in seconds
- * @param mass - the mass matrix
- * @param energy(q, qdot) -  a function that computes the energy of the FEM system. This takes q and qdot as parameters, returns the energy value.
- * @param force(f, q, qdot) - a function that computes the force acting on the FEM system. This takes q and qdot as parameters, returns the force in f.
- * @param stiffness(K, q, qdot) - a function that computes the stiffness (negative second derivative of the potential energy). This takes q and qdot as parameters, returns the stiffness matrix in K.
- * @param tmp_qdot - scratch space for storing velocities
- * @param tmp_force - scratch space to collect forces
- * @param tmp_stiffness - scratch space to collect stiffness matrix
- * @param q - set q to the updated generalized coordinate using linearly implicit time integration
- * @param qdot - set qdot to the updated generalized velocity using linearly implicit time integration
- */
+// Input:
+//   q - generalized coordinates for the FEM system
+//   qdot - generalized velocity for the FEM system
+//   dt - the time step in seconds
+//   mass - the mass matrix
+//   energy(q, qdot) -  a function that computes the energy of the FEM system. This takes q and qdot as parameters, returns the energy value.
+//   force(f, q, qdot) - a function that computes the force acting on the FEM system. This takes q and qdot as parameters, returns the force in f.
+//   stiffness(K, q, qdot) - a function that computes the stiffness (negative second derivative of the potential energy). This takes q and qdot as parameters, returns the stiffness matrix in K.
+//   tmp_qdot - scratch space for storing velocities
+//   tmp_force - scratch space to collect forces
+//   tmp_stiffness - scratch space to collect stiffness matrix
+// Output:
+//   q - set q to the updated generalized coordinate using linearly implicit time integration
+//   qdot - set qdot to the updated generalized velocity using linearly implicit time integration
 template <typename ENERGY, typename FORCE, typename STIFFNESS>
 inline void implicit_euler(
     Eigen::VectorXd &q,
@@ -50,9 +50,7 @@ inline void implicit_euler(
         stiffness(tmp_stiffness, q + dt * v, v);
         d2_cost = mass - dt * dt * tmp_stiffness;
     };
-    using ObjectiveType = decltype(cost);
-    using JacobianType = decltype(grad_cost);
-    using HessianType = decltype(hess_cost);
+
     // Use current qdot as initial guess
     tmp_qdot = qdot;
     Eigen::VectorXd tmp_g;

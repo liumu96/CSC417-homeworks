@@ -8,7 +8,6 @@ void T_linear_tetrahedron(
     double density,
     double volume)
 {
-    // todo
     Eigen::Matrix1212d M;
     Eigen::Vector12d target_qdot;
     target_qdot << qdot.segment<3>(element(0) * 3),

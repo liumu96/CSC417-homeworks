@@ -126,7 +126,7 @@ bool Visualize::plot_phase_space(
             DrawList->AddLine(
                 normalized_to_pix(p1),
                 normalized_to_pix(p2),
-                4290733594, 2);
+                GetColorU32(ImGuiCol_ButtonActive), 2);
         }
     }
 

@@ -1,5 +1,6 @@
 #include "visualization.h"
 
+// libigl viewer
 namespace Visualize
 {
     igl::opengl::glfw::Viewer g_viewer;
@@ -19,7 +20,7 @@ namespace Visualize
     std::vector<unsigned int> g_picked_vertices;
     unsigned int g_selected_obj;
 
-    // pointers to q and qdot
+    // pointers to q and qdot (I want to change this to functions that compute the current vertex positions)
     Eigen::VectorXd const *g_q;
     Eigen::VectorXd const *g_qdot;
 
@@ -69,6 +70,7 @@ bool Visualize::plot_phase_space(
     // update plotting cache
     g_state.push_back(std::make_pair(q(0), q_dot(0)));
 
+    // ImGUI stuff that I don't understand (taken from code example here: https://github.com/ocornut/imgui/issues/786)
     const ImGuiStyle &Style = GetStyle();
     const ImGuiIO &IO = GetIO();
     ImDrawList *DrawList = GetWindowDrawList();
@@ -77,7 +79,7 @@ bool Visualize::plot_phase_space(
     if (Window->SkipItems)
         return false;
 
-    // header ans spacing
+    // header and spacing
     int hovered = IsItemActive() || IsItemHovered();
     Dummy(ImVec2(0, 3));
 
@@ -149,7 +151,7 @@ bool Visualize::plot_phase_space(
             DrawList->AddLine(
                 normalized_to_pix(p1),
                 normalized_to_pix(p2),
-                4290733594, 2);
+                GetColorU32(ImGuiCol_ButtonActive), 2);
         }
     }
 
@@ -274,9 +276,11 @@ bool Visualize::plot_energy(
 
     return true;
 }
-void Visualize::setup(const Eigen::VectorXd &q,
-                      const Eigen::VectorXd &qdot,
-                      bool ps_plot)
+
+void Visualize::setup(
+    const Eigen::VectorXd &q,
+    const Eigen::VectorXd &qdot,
+    bool ps_plot)
 {
     g_q = &q;
     g_qdot = &qdot;
@@ -287,7 +291,53 @@ void Visualize::setup(const Eigen::VectorXd &q,
 
     menu.callback_draw_viewer_menu = [&]()
     {
-        // menu.draw_viewer_menu();
+        ImGuiStyle &style = ImGui::GetStyle();
+        style.WindowRounding = 5.3f;
+        style.FrameRounding = 2.3f;
+        style.ScrollbarRounding = 0;
+
+        style.Colors[ImGuiCol_Text] = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
+        style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.70f, 0.70f, 0.70f, 1.00f);
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.8f, 0.8f, 0.8f, 1.00f);
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.72f, 0.72f, 0.72f, 1.00f);
+        style.Colors[ImGuiCol_PopupBg] = ImVec4(0.05f, 0.05f, 0.10f, 0.85f);
+        style.Colors[ImGuiCol_Border] = ImVec4(0.70f, 0.70f, 0.70f, 0.65f);
+        style.Colors[ImGuiCol_BorderShadow] = ImVec4(1.00f, 0.00f, 0.00f, 0.00f);
+        style.Colors[ImGuiCol_FrameBg] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+        style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.90f, 0.80f, 0.80f, 0.40f);
+        style.Colors[ImGuiCol_FrameBgActive] = ImVec4(0.90f, 0.65f, 0.65f, 0.45f);
+        style.Colors[ImGuiCol_TitleBg] = ImVec4(0.960f, 0.960f, 0.960f, 1.0f);
+        style.Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.960f, 0.960f, 0.960f, 1.0f);
+        style.Colors[ImGuiCol_TitleBgActive] = ImVec4(0.960f, 0.960f, 0.960f, 1.0f);
+        style.Colors[ImGuiCol_MenuBarBg] = ImVec4(0.01f, 0.01f, 0.02f, 0.80f);
+        style.Colors[ImGuiCol_ScrollbarBg] = ImVec4(0.20f, 0.25f, 0.30f, 0.60f);
+        style.Colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.55f, 0.53f, 0.55f, 0.51f);
+        style.Colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.56f, 0.56f, 0.56f, 1.00f);
+        style.Colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.56f, 0.56f, 0.56f, 0.91f);
+        style.Colors[ImGuiCol_CheckMark] = ImVec4(0.90f, 0.90f, 0.90f, 0.83f);
+        style.Colors[ImGuiCol_SliderGrab] = ImVec4(0.70f, 0.70f, 0.70f, 0.62f);
+        style.Colors[ImGuiCol_SliderGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 0.84f);
+        style.Colors[ImGuiCol_Button] = ImVec4(0.48f, 0.72f, 0.89f, 1.00f);
+        style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.50f, 0.69f, 0.99f, 1.00f);
+        style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.80f, 0.50f, 0.50f, 1.00f);
+        style.Colors[ImGuiCol_Header] = ImVec4(0.44f, 0.61f, 0.86f, 1.00f);
+        style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.44f, 0.61f, 0.86f, 1.00f);
+        style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.44f, 0.61f, 0.86f, 1.00f);
+        style.Colors[ImGuiCol_ResizeGrip] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
+        style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.70f, 0.60f, 0.60f, 1.00f);
+        style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.90f, 0.70f, 0.70f, 1.00f);
+        style.Colors[ImGuiCol_ResizeGrip] = ImVec4(0.70f, 0.70f, 0.70f, 1.00f);
+        style.Colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.70f, 0.70f, 0.70f, 1.00f);
+        style.Colors[ImGuiCol_ResizeGripActive] = ImVec4(0.70f, 0.70f, 0.70f, 1.00f);
+        style.Colors[ImGuiCol_PlotLines] = ImVec4(0.00f, 1.00f, 0.00f, 1.00f);
+        style.Colors[ImGuiCol_PlotLinesHovered] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+        style.Colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+        style.Colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
+        style.Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.00f, 0.00f, 1.00f, 0.35f);
+        style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
+
+        // Draw parent menu content
+        menu.draw_viewer_menu();
     };
 
     Visualize::g_viewer.callback_mouse_down = mouse_down;
@@ -357,7 +407,7 @@ void Visualize::update_vertex_positions(
     // update vertex positions
     for (unsigned int ii = 0; ii < g_geometry[id].first.rows(); ii++)
     {
-        g_viewer.data_list[g_id[id]].V.row(ii) = pos.segment<3>(3 * ii).transpose();
+        g_geometry[g_id[id]].first.row(ii) = pos.segment<3>(3 * ii).transpose();
     }
 
     if (g_skinning)
@@ -398,19 +448,17 @@ bool Visualize::mouse_down(
 
     // if you click on the mesh select the vertex, otherwise do nothing
     if (pick_nearest_vertices(
-            g_picked_vertices,
-            g_mouse_win,
+            g_picked_vertices, g_mouse_win,
             g_viewer.core().view,
             g_viewer.core().proj,
             g_viewer.core().viewport,
-            g_viewer.data().V,
+            g_geometry[0].first,
             g_geometry[0].second,
             g_picking_tol))
     {
         g_selected_obj = 0;
         g_mouse_dragging = true;
     }
-    // std::cout << g_mouse_dragging << std::endl;
 
     return false;
 }

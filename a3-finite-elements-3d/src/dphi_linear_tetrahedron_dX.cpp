@@ -6,6 +6,10 @@ void dphi_linear_tetrahedron_dX(
     Eigen::Ref<const Eigen::RowVectorXi> element,
     Eigen::Ref<const Eigen::Vector3d> X)
 {
+    //        dphi0/dx  dphi0/dy  dphi0/dz
+    // dphi = dphi1/dx  dphi1/dy  dphi1/dz = | -1^T * T^-1 |
+    //        dphi2/dx  dphi2/dy  dphi2/dz   |    T^-1     |
+    //        dphi3/dx  dphi3/dy  dphi3/dz
     dphi.setZero();
 
     Eigen::Vector3d X0 = V.row(element(0));

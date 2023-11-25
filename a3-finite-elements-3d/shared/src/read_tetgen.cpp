@@ -13,7 +13,7 @@ int openIfstream(std::ifstream &in, std::string filename)
 }
 
 // Written by Dave Levin (University of Toronto)
-int openofstream(std::ofstream &out, std::string filename)
+int openOfstream(std::ofstream &out, std::string filename)
 {
     out.open(filename);
     if (!out.good())
@@ -51,11 +51,14 @@ int loadTet(
         {
             continue;
         }
-
+        // skip comments
+        if (line.at(0) == '#')
+        {
+            continue;
+        }
         std::stringstream ss(line);
 
         ss >> intVal;
-
         for (int ii = 0; ii < 3; ii++)
         {
             ss >> V(cnt, ii);
@@ -73,6 +76,7 @@ int loadTet(
 
     int nV = 0;
     eleIn >> nV;
+    cnt = 0;
     getline(eleIn, line);
     while (1)
     {
@@ -89,10 +93,10 @@ int loadTet(
         {
             continue;
         }
-
         std::stringstream ss(line);
         ss >> intVal;
 
+        // e[cnt].resize(nV);
         for (int ii = 0; ii < nV; ii++)
         {
             ss >> F(cnt, ii);
@@ -108,6 +112,7 @@ int loadTet(
     return 0;
 }
 
+// Lions share of code borrowed from Desai Chen for SIMIT
 void read_tetgen(
     Eigen::MatrixXd &V,
     Eigen::MatrixXi &F,

@@ -11,7 +11,7 @@ void assemble_stiffness(
     double C,
     double D)
 {
-    // todo
+
     K.resize(q.size(), q.size());
     K.setZero();
     std::vector<Eigen::Triplet<double>> K_entries;
@@ -23,10 +23,12 @@ void assemble_stiffness(
         Eigen::Matrix1212d d2V;
         d2V_linear_tetrahedron_dq2(d2V, q, V, current_tetrahedron, v0(i), C, D);
 
+        // Iterate to populate 16 total d2V/d(corner_i)(corner_j) blocks
         for (int vertex_i = 0; vertex_i < 4; vertex_i++)
         {
             for (int vertex_j = 0; vertex_j < 4; vertex_j++)
             {
+                // Iterate to populate 3x3 entries of each block
                 for (int xyz_i = 0; xyz_i < 3; xyz_i++)
                 {
                     for (int xyz_j = 0; xyz_j < 3; xyz_j++)

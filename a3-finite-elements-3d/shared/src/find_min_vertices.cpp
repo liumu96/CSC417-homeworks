@@ -13,8 +13,6 @@ void find_min_vertices(
         min_vertex = (V(vi, 1) < min_vertex ? V(vi, 1) : min_vertex);
     }
 
-    std::cout << min_vertex << std::endl;
-
     for (unsigned int vi = 0; vi < V.rows(); vi++)
     {
         if (std::abs(V(vi, 1) - min_vertex) <= tol)

@@ -1,6 +1,15 @@
 #include "mass_matrix_mesh.h"
 #include "mass_matrix_linear_tetrahedron.h"
 
+/**
+ * Input:
+ * @param qdot - generalized velocity for the FEM system
+ * @param T - the mx4 vertex indices for tet mesh
+ * @param density - density of material
+ * @param v0 - the undeformed tetrahedra volumes
+ * Output:
+ * @param M - Sparse mass matrix for the whole mesh.
+ */
 void mass_matrix_mesh(
     Eigen::SparseMatrixd &M,
     Eigen::Ref<const Eigen::VectorXd> qdot,
@@ -19,7 +28,7 @@ void mass_matrix_mesh(
         Eigen::Matrix1212d current_tetrahedron_M;
         mass_matrix_linear_tetrahedron(current_tetrahedron_M, qdot, T.row(i), density, v0(i));
 
-        // Iterate to populate 16 total d2V/d(corner_i)(corner_i) blocks
+        // Iterate to populate 16 total d2V/d(corner_i)(corner_j) blocks
         for (int phi_i = 0; phi_i < 4; phi_i++)
         {
             for (int phi_j = 0; phi_j < 4; phi_j++)
