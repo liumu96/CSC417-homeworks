@@ -55,7 +55,7 @@ Eigen::VectorXd x0;
 // Mass matrix
 Eigen::SparseMatrixd M; // mass matrix
 Eigen::VectorXd a0;     // areas
-Eigen::MatrixXd dX;     // vertices of simulation mesh //this will hold all individual pieces of cloth, I'll load some offsets
+Eigen::MatrixXd dX;     // vertices of simulation mesh
 
 // scratch memory for assembly
 Eigen::VectorXd tmp_qdot;
@@ -96,27 +96,27 @@ inline void simulate(Eigen::VectorXd &q, Eigen::VectorXd &qdot, double dt, doubl
 
     KE = PE = 0;
 
-    auto energy = [&](Eigen::Ref<const Eigen::VectorXd> qdot_1) -> double
-    {
-        double E = 0;
-        Eigen::VectorXd newq = P.transpose() * (q + dt * qdot_1) + x0;
+    // auto energy = [&](Eigen::Ref<const Eigen::VectorXd> qdot_1) -> double
+    // {
+    //     double E = 0;
+    //     Eigen::VectorXd newq = P.transpose() * (q + dt * qdot_1) + x0;
 
-        for (unsigned int ei = 0; ei < F.rows(); ei++)
-        {
-            V_membrane_corotational(V_ele, newq, Eigen::Map<Eigen::Matrix3d>(dX.row(ei).data()), V, F.row(ei), a0(ei), C, D);
-            E += V_ele;
-        }
+    //     for (unsigned int ei = 0; ei < F.rows(); ei++)
+    //     {
+    //         V_membrane_corotational(V_ele, newq, Eigen::Map<Eigen::Matrix3d>(dX.row(ei).data()), V, F.row(ei), a0(ei), C, D);
+    //         E += V_ele;
+    //     }
 
-        for (unsigned int pickedi = 0; pickedi < spring_points.size(); pickedi++)
-        {
-            V_spring_particle_particle(V_ele, spring_points[pickedi].first, newq.segment<3>(spring_points[pickedi].second), 0.0, k_selected_now);
-            E += V_ele;
-        }
+    //     for (unsigned int pickedi = 0; pickedi < spring_points.size(); pickedi++)
+    //     {
+    //         V_spring_particle_particle(V_ele, spring_points[pickedi].first, newq.segment<3>(spring_points[pickedi].second), 0.0, k_selected_now);
+    //         E += V_ele;
+    //     }
 
-        E += 0.5 * (qdot_1 - qdot).transpose() * M * (qdot_1 - qdot);
+    //     E += 0.5 * (qdot_1 - qdot).transpose() * M * (qdot_1 - qdot);
 
-        return E;
-    };
+    //     return E;
+    // };
 
     auto force = [&](Eigen::VectorXd &f, Eigen::Ref<const Eigen::VectorXd> q2, Eigen::Ref<const Eigen::VectorXd> qdot2)
     {
@@ -156,7 +156,7 @@ inline void simulate(Eigen::VectorXd &q, Eigen::VectorXd &qdot, double dt, doubl
     // velocity filter
     if (collision_detection_on)
     {
-        velocity_filter_cloth_sphere(qdot, collision_indices, collision_normals);
+        // velocity_filter_cloth_sphere(qdot, collision_indices, collision_normals);
     }
 
     q = qtmp + dt * qdot;
@@ -198,7 +198,7 @@ inline void assignment_setup(int argc, char **argv, Eigen::VectorXd &q, Eigen::V
     N.resize(V.rows(), V.rows());
     N.setIdentity();
 
-    Visualize::add_object_to_scene(V, F, V_skin, F_skin, N, Eigen::RowVector3d(244, 265, 130) / 255.);
+    Visualize::add_object_to_scene(V, F, V_skin, F_skin, N, Eigen::RowVector3d(244, 165, 130) / 255.);
 
     // add collision sphere to scene
     V_sphere_skin = V_sphere;
@@ -206,7 +206,7 @@ inline void assignment_setup(int argc, char **argv, Eigen::VectorXd &q, Eigen::V
     N.resize(V.rows(), V.rows());
     N.setIdentity();
 
-    Visualize::add_object_to_scene(V_sphere, F_sphere, V_sphere_skin, F_sphere_skin, N, Eigen::RowVector3d(244, 265, 130) / 255.);
+    Visualize::add_object_to_scene(V_sphere, F_sphere, V_sphere_skin, F_sphere_skin, N, Eigen::RowVector3d(244, 165, 130) / 255.);
     Visualize::set_visible(1, collision_detection_on);
 
     // compute dX and area of each face

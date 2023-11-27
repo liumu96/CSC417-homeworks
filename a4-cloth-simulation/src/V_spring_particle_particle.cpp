@@ -7,5 +7,5 @@ void V_spring_particle_particle(
     double l0,
     double stiffness)
 {
-    // todo
+    V = 0.5 * stiffness * std::pow((q1 - q0).norm() - l0, 2);
 }

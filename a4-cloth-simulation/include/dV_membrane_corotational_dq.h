@@ -11,14 +11,14 @@
  * @param: area - the area of this triangle
  * @param: mu,lambda - material parameters for the cloth material model
  * Output:
- * @param: f - the per-triangle gradient of the membrane potential energy (the linear model described in the README).
+ * @param: dV - the per-triangle gradient of the membrane potential energy (the linear model described in the README).
  */
 void dV_membrane_corotational_dq(
-    Eigen::Vector9d &f,
+    Eigen::Vector9d &dV,
     Eigen::Ref<const Eigen::VectorXd> q,
     Eigen::Ref<const Eigen::Matrix3d> dX,
     Eigen::Ref<const Eigen::MatrixXd> V,
     Eigen::Ref<const Eigen::RowVectorXi> element,
     double area,
-    double mu, 
+    double mu,
     double lambda);

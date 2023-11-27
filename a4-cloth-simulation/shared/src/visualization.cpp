@@ -216,7 +216,7 @@ void Visualize::setup(
         style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
 
         // Draw parent menu content
-        // menu.draw_viewer_menu();
+        menu.draw_viewer_menu();
     };
 
     Visualize::g_viewer.callback_mouse_down = mouse_down;
