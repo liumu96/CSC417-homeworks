@@ -156,7 +156,7 @@ inline void simulate(Eigen::VectorXd &q, Eigen::VectorXd &qdot, double dt, doubl
     // velocity filter
     if (collision_detection_on)
     {
-        // velocity_filter_cloth_sphere(qdot, collision_indices, collision_normals);
+        velocity_filter_cloth_sphere(qdot, collision_indices, collision_normals);
     }
 
     q = qtmp + dt * qdot;
