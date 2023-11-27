@@ -1,5 +1,5 @@
 #include "mass_matrix_mesh.h"
-#include <iostream>
+#include <vector>
 
 // Assemble the full mass matrix for the entire tetrahedral mesh.
 void mass_matrix_mesh(
@@ -10,7 +10,6 @@ void mass_matrix_mesh(
     double density,
     Eigen::Ref<const Eigen::VectorXd> areas)
 {
-    // todo
     // Single triangle:
     //                       [ 1/6, 1/12, 1/12]
     // M_0 = h * rho * area  [1/12,  1/6, 1/12]

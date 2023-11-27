@@ -1,9 +1,17 @@
 #include "d2V_membrane_corotational_dq2.h"
+#include <iostream>
+#include <igl/svd3x3.h>
+#include <Eigen/SVD>
 
 // Hessian matrix of the cloth stretching energy
-void d2V_membrane_corotational_dq2(Eigen::Matrix99d &H, Eigen::Ref<const Eigen::VectorXd> q, Eigen::Ref<const Eigen::Matrix3d> dX,
-                                   Eigen::Ref<const Eigen::MatrixXd> V, Eigen::Ref<const Eigen::RowVectorXi> element, double area,
-                                   double mu, double lambda)
+void d2V_membrane_corotational_dq2(
+    Eigen::Matrix99d &H,
+    Eigen::Ref<const Eigen::VectorXd> q,
+    Eigen::Ref<const Eigen::Matrix3d> dX,
+    Eigen::Ref<const Eigen::MatrixXd> V,
+    Eigen::Ref<const Eigen::RowVectorXi> element,
+    double area,
+    double mu, double lambda)
 {
 
     // SVD = USW^T
@@ -75,6 +83,7 @@ void d2V_membrane_corotational_dq2(Eigen::Matrix99d &H, Eigen::Ref<const Eigen::
     }
 
     // TODO: compute H, the hessian of the corotational energy
+    // Compute tensors for d2psi_dF2, dS, and define ds_ij
     Eigen::Matrix3d dS;
     dS.setZero();
     for (int i = 0; i < 3; i++)
