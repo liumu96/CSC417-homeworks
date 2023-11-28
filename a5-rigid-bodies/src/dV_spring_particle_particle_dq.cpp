@@ -7,5 +7,8 @@ void dV_spring_particle_particle_dq(
     double l0, double stiffness)
 {
 
-    // todo
+    f.setZero();
+    double dV_constant = stiffness * (1 - l0 / (q1 - q0).norm());
+    f << dV_constant * (q0 - q1),
+        dV_constant * (q1 - q0);
 }

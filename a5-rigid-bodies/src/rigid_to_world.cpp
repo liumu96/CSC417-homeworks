@@ -7,5 +7,5 @@ void rigid_to_world(
     Eigen::Ref<const Eigen::Vector3d> X)
 {
 
-    // tood
+    x = R * X + p;
 }

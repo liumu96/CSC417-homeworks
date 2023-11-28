@@ -25,5 +25,25 @@ inline void exponential_euler(
     std::vector<Eigen::Matrix66d> &masses,
     Eigen::Ref<const Eigen::VectorXd> forces)
 {
-    // todo
+    for (int i = 0; i < qdot.size() / 6; i++)
+    {
+        // Get all the current parameters
+        Eigen::Matrix3d R = Eigen::Map<const Eigen::Matrix3d>(q.segment<9>(12 * i).data());
+        Eigen::Vector3d p = q.segment<3>(12 * i + 9);
+        Eigen::Vector3d omega = qdot.segment<3>(6 * i);
+        Eigen::Vector3d pdot = qdot.segment<3>(6 * i + 3);
+        Eigen::Matrix3d I = masses[i].block<3, 3>(0, 0);
+        double mass = masses[i](3, 3);
+        Eigen::Vector3d t_torq = forces.segment<3>(6 * i);
+        Eigen::Vector3d f_ext = forces.segment<3>(6 * i + 3);
+
+        Eigen::Matrix3d update_rotation, R_next_t;
+        rodrigues(update_rotation, omega * dt);
+        R_next_t = update_rotation * R;
+        q.segment<9>(12 * i) = Eigen::Map<const Eigen::Vector9d>(R_next_t.data());
+        q.segment<3>(12 * i + 9) = p + dt * pdot;
+
+        qdot.segment<3>(6 * i) = (R * I * R.transpose()).inverse() * ((R * I * R.transpose()) * omega - dt * omega.cross((R * I * R.transpose()) * omega) + dt * t_torq);
+        qdot.segment<3>(6 * i + 3) = (mass * pdot + dt * f_ext) / mass;
+    }
 }
