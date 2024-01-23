@@ -275,9 +275,9 @@ inline void assignment_setup(int argc, char **argv, Eigen::VectorXd &q, Eigen::V
         // Define next window position + size
         ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
-        ImGui::Begin(
-            "Energy Plot", nullptr,
-            ImGuiWindowFlags_NoSavedSettings);
+        // ImGui::Begin(
+        //     "Energy Plot", nullptr,
+        //     ImGuiWindowFlags_NoSavedSettings);
 
         ImVec2 min = ImGui::GetWindowContentRegionMin();
         ImVec2 max = ImGui::GetWindowContentRegionMax();
@@ -285,9 +285,9 @@ inline void assignment_setup(int argc, char **argv, Eigen::VectorXd &q, Eigen::V
         max.x = (max.x - min.x) / 2;
         max.y -= min.y + ImGui::GetTextLineHeightWithSpacing() * 3;
 
-        Visualize::plot_energy("T", 1, ImVec2(-15, 10), ImVec2(0, 2e6), ImGui::GetColorU32(ImGuiCol_PlotLines));
-        Visualize::plot_energy("V", 2, ImVec2(-15, 10), ImVec2(0, 2e6), ImGui::GetColorU32(ImGuiCol_HeaderActive));
-        Visualize::plot_energy("T+V", 3, ImVec2(-15, 10), ImVec2(0, 4e6), ImGui::GetColorU32(ImGuiCol_ResizeGripActive));
+        // Visualize::plot_energy("T", 1, ImVec2(-15, 10), ImVec2(0, 2e6), ImGui::GetColorU32(ImGuiCol_PlotLines));
+        // Visualize::plot_energy("V", 2, ImVec2(-15, 10), ImVec2(0, 2e6), ImGui::GetColorU32(ImGuiCol_HeaderActive));
+        // Visualize::plot_energy("T+V", 3, ImVec2(-15, 10), ImVec2(0, 4e6), ImGui::GetColorU32(ImGuiCol_ResizeGripActive));
 
         ImGui::End();
     };

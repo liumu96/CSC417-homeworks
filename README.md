@@ -38,3 +38,14 @@ make
 ```shell
 ./mass-spring-3d
 ```
+
+- [FEM-3D](./a3-finite-elements-3d/README.md)
+
+```shell
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make
+```
+
+```shell
+./finite-elements-3d
+```
