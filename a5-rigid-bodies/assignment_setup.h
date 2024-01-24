@@ -134,7 +134,7 @@ inline void assignment_setup(int argc, char **argv, Eigen::VectorXd &q, Eigen::V
         mass_matrices.push_back(mass_matrix);
 
         // inital angular velocity
-        qdot.segment<3>(6 * irb) << 0.1, 0.1, 0.0;
+        qdot.segment<3>(6 * irb) << 0.01, 0.01, 0.0;
 
         // setup rigid bodies initial position in space
         q.segment<3>(RB_OFFSET * irb + RB_POS_OFFSET) = com;

@@ -18,11 +18,11 @@ void rigid_body_jacobian(
 
     //         | R^T  0 |
     // temp2 = |        |
-    //         |  0  R^T|
+    //         |  0  I|
     Eigen::Matrix66d temp2;
     temp2.setZero();
     temp2.block<3, 3>(0, 0) = R.transpose();
-    temp2.block<3, 3>(3, 3) = R.transpose();
+    temp2.block<3, 3>(3, 3) = Eigen::Matrix3d::Identity();
 
     J = R * temp1 * temp2;
 }
