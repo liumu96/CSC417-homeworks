@@ -6,11 +6,17 @@ This repository is the collection of notes and homeworks based on the course [CS
 
 ```shell
 mkdir build && cd build
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Release
 make
+cd build
 ```
 
-- [mass-spring-1D](./a1-mass-spring-1d/README.md)
+- [mass-spring-1D](./a1-mass-spring-1d/README.md)  
+  ![](./results/a1.gif)
+
+```
+cd a1-mass-spring-1d
+```
 
 ```shell
 ./mass-spring-1d
@@ -28,24 +34,42 @@ make
 ./mass-spring-1d 'se'
 ```
 
-- [mass-spring-3d](./a2-mass-spring-3d/README.md)
+- [mass-spring-3d](./a2-mass-spring-3d/README.md)  
+  ![](./results/a2.gif)
 
 ```shell
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make
-```
-
-```shell
+cd a2-mass-spring-3d
 ./mass-spring-3d
 ```
 
-- [FEM-3D](./a3-finite-elements-3d/README.md)
+- [FEM-3D](./a3-finite-elements-3d/README.md)  
+  ![](./results/a3.gif)
 
 ```shell
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make
+cd a3-finite-element-3d
+./finite-elements-3d
 ```
 
+- [FEM-Cloth-Simulation](./a4-cloth-simulation/README.md)  
+  ![](./results/a4.gif)
+
 ```shell
-./finite-elements-3d
+cd a4-cloth-simulation
+./cloth-simulation
+```
+
+- [Rigid Bodies](./a5-rigid-bodies/README.md)  
+  ![](./results/a5.gif)
+
+```shell
+cd a5-rigid-bodies
+./rigid-bodies
+```
+
+- [Rigid Bodies Collision](./a6-rigid-bodies-contact/README.md)  
+  ![](./results/a6.gif)
+
+```shell
+cd a6-rigid-bodies-contact
+./a6-rigid-bodies-contact
 ```
