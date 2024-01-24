@@ -151,7 +151,7 @@ $$
 $$
 
 $$
-T = \begin{bmatrix}(\bold X_1 - \bold X_0)& (\bold X_2 - \bold X_0)]\end{bmatrix}
+T = \begin{bmatrix}(\mathbf X_1 - \mathbf X_0)& (\mathbf X_2 - \mathbf X_0)]\end{bmatrix}
 $$
 
 $$
